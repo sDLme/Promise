@@ -26,24 +26,29 @@ function solution(N) {
     }
   ]
 
-  return  p = new Promise((resolve, reject) => {
-    if(N < 5) {
-      resolve(liked)
-     } else {
-       reject('Error')
-     }
-
-  }).then(data => {
-    let arr = []
-
-      return arr
-
+    return  new Promise((resolve, reject) => {
+        // get data
+        resolve(liked)
+    })
+    .then(data => {
+        // get more data
+        data[0].id = 777
+        return data
+    })
+    .then(data => {
+        if(N < 5) { 
+            return Promise.reject('Error');
+        } 
+        else {
+            return data
+        }
     }).catch(error => {
-      return error
+        return error
     })
 
 }
 
-solution(5).then(data => {
+
+solution(4).then(data => {
   console.log('data->',data)
 })
