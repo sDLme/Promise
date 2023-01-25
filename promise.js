@@ -1,11 +1,7 @@
 
 function solution(N) {
-
   const liked = [
-    {
-      id: 12,
-      name: 'LikeBrands'
-    },
+    
     {
       id: 14,
       name: 'LikeBrands1'
@@ -15,7 +11,6 @@ function solution(N) {
       name: 'LikeBrands2'
     }
   ]
-  
   const brand = [
     {
       id: 10,
@@ -31,25 +26,24 @@ function solution(N) {
     }
   ]
 
-  const p2 = Promise.all([liked,brand])
+  return  p = new Promise((resolve, reject) => {
+    if(N < 5) {
+      resolve(liked)
+     } else {
+       reject('Error')
+     }
 
-  return p2.then(data => {
-
+  }).then(data => {
     let arr = []
 
-    for(let i= 0; i < data[0].length; i++) {
-      arr.push(data[0][i].name)
-    }
+      return arr
 
-   if(N > data[0].length) {
-     for(let i= 0; i < (N - data[0].length); i++) {
-       arr.push(data[1][i].name)
-     }
-   }
-
-  console.log(arr)
-  })
+    }).catch(error => {
+      return error
+    })
 
 }
 
-console.log(solution(5))
+solution(5).then(data => {
+  console.log('data->',data)
+})
