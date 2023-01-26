@@ -2,12 +2,12 @@
 function solution(N) {
   const likedArr = [
     {
-      id: 10,
-      name: 'LikeBrands'
+      id: 14,
+      name: 'LikeBrands1'
     },
     {
       id: 14,
-      name: 'LikeBrands1'
+      name: 'LikeBrands'
     },
     
   ]
@@ -28,14 +28,7 @@ function solution(N) {
   ]
 
   pBrand = Promise.resolve(brandArr)
-
-  pLiked = new Promise((resolve, reject) => {
-    if(N < 5) {
-      resolve(likedArr)
-     } else {
-       reject('Something went wrong')
-     }
-  })
+  pLiked = Promise.resolve(likedArr)
 
   return Promise.all([pLiked,pBrand]).then(data => {
     let result= [];
@@ -43,13 +36,12 @@ function solution(N) {
                     ?.filter((value, index, self) => index === self.findIndex((t => t.name === value.name)));
 
     if(concatArr.length < N) {
-        result = Promise.reject('Something went wrong again')
+        return Promise.reject('Something went wrong again')
     } else {
       for(let i= 0; i < N; i++) {
         result.push(concatArr[i].name)
       }
     }
-    
       return result;
 
   })
@@ -58,6 +50,6 @@ function solution(N) {
   })
 }
 
-solution(2).then(result => {
+solution(4).then(result => {
   console.log('result->',result)
 })
