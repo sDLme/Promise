@@ -36,20 +36,19 @@ function solution(N) {
                     ?.filter((value, index, self) => index === self.findIndex((t => t.name === value.name)));
 
     if(concatArr.length < N) {
-        return Promise.reject('Something went wrong again')
+      return Promise.reject('Something went wrong again')
     } else {
       for(let i= 0; i < N; i++) {
         result.push(concatArr[i].name)
       }
-    }
       return result;
-
+    }
   })
   .catch(errorMessage => {
     return errorMessage
   })
 }
 
-solution(4).then(result => {
+solution(3).then(result => {
   console.log('result->',result)
 })
