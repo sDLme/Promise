@@ -1,6 +1,6 @@
 
 function solution(N) {
-  const liked = [
+  const likedArr = [
     
     {
       id: 14,
@@ -11,10 +11,11 @@ function solution(N) {
       name: 'LikeBrands2'
     }
   ]
-  const brand = [
+
+  const brandArr = [
     {
-      id: 10,
-      name: 'Brand1'
+      id: 14,
+      name: 'LikeBrands1'
     },
     {
       id: 8,
@@ -26,24 +27,33 @@ function solution(N) {
     }
   ]
 
-  return  p = new Promise((resolve, reject) => {
+  pBrand = Promise.resolve(brandArr)
+
+  pLiked = new Promise((resolve, reject) => {
     if(N < 5) {
-      resolve(liked)
+      resolve(likedArr)
      } else {
-       reject('Error')
+       reject('Something went wrong')
      }
+  })
 
-  }).then(data => {
-    let arr = []
+  return Promise.all([pLiked,pBrand]).then(data => {
+    let result = [];
+    const concatArr = data[0].concat(data[1])
+                    .filter((value, index, self) => index === self.findIndex((t => t.name === value.name)));
 
-      return arr
+      for(let i= 0; i < N; i++) {
+        arr.push(concatArr[i].name)
+      }
+    
+      return result;
 
-    }).catch(error => {
-      return error
-    })
-
+  })
+  .catch(errorMessage => {
+    return errorMessage
+  })
 }
 
-solution(5).then(data => {
-  console.log('data->',data)
+solution(1).then(result => {
+  console.log('result->',result)
 })
